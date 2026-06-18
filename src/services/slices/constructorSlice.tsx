@@ -2,10 +2,6 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient, TOrder } from '@utils-types';
 import { orderBurgerApi } from '@api';
 
-type TOrderModalData = {
-  number: number;
-};
-
 type TConstructorIngredientState = {
   bun: TIngredient | null;
   ingredients: TConstructorIngredient[];

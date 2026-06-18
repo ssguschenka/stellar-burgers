@@ -2,24 +2,28 @@ import { FC, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
-import { useSelector } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { fetchOrderByNumber } from '../../services/slices/feedSlice';
 
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */
   const { number } = useParams();
-  const orderData = useSelector((state) =>
-    state.feed.orders.find((item) => item.number === Number(number))
-  );
-  // const orderData = {
-  //   createdAt: '',
-  //   ingredients: [],
-  //   _id: '',
-  //   status: '',
-  //   name: '',
-  //   updatedAt: 'string',
-  //   number: 0
-  // };
+  const dispatch = useDispatch();
+  const orderData = useSelector((state) => {
+    const orderFromList = state.feed.orders.find(
+      (item) => item.number === Number(number)
+    );
+
+    return orderFromList || state.feed.currentOrder;
+  });
+
+  useEffect(() => {
+    if (number && !orderData) {
+      dispatch(fetchOrderByNumber(Number(number)));
+    }
+  }, [dispatch, number, orderData]);
   const allIngredients = useSelector((state) => state.ingredients.ingredients);
   const ingredients: TIngredient[] = orderData?.ingredients
     .map((id) => allIngredients.find((item) => item._id === id))
