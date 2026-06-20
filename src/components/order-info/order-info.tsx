@@ -3,17 +3,20 @@ import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useSelector, useDispatch } from '../../services/store';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchOrderByNumber } from '../../services/slices/feedSlice';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams();
+  const location = useLocation();
   const dispatch = useDispatch();
   const orderData = useSelector((state) => {
-    const orderFromList = state.feed.orders.find(
-      (item) => item.number === Number(number)
-    );
+    const orders = location.pathname.startsWith('/profile')
+      ? state.profileOrders.orders
+      : state.feed.orders;
+
+    const orderFromList = orders.find((item) => item.number === Number(number));
 
     return orderFromList || state.feed.currentOrder;
   });

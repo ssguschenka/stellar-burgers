@@ -10,7 +10,6 @@ import ingredientsReducer from './slices/ingredientsSlice';
 import feedReduser from './slices/feedSlice';
 import profileOrdersReduser from './slices/profileOrdersslice';
 import registerReduser from './slices/registerSlice';
-import loginUserReduser from './slices/loginUserSlice';
 import userReduser from './slices/userSlice';
 
 const rootReducer = combineReducers({
@@ -19,7 +18,6 @@ const rootReducer = combineReducers({
   feed: feedReduser,
   profileOrders: profileOrdersReduser,
   registerUser: registerReduser,
-  loginUser: loginUserReduser,
   user: userReduser
 });
 

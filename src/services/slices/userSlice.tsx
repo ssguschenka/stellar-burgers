@@ -5,8 +5,7 @@ import {
   TRegisterData,
   logoutApi,
   loginUserApi,
-  TLoginData,
-  forgotPasswordApi
+  TLoginData
 } from '@api';
 import { TUser } from '@utils-types';
 import { deleteCookie, setCookie } from '../../utils/cookie';
@@ -35,7 +34,7 @@ export const loginUser = createAsyncThunk(
     localStorage.setItem('refreshToken', response.refreshToken);
     setCookie('accessToken', response.accessToken);
 
-    return response;
+    return response.user;
   }
 );
 
@@ -71,10 +70,11 @@ export const userSlice = createSlice({
         state.isUserLoading = true;
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, (state) => {
+      .addCase(loginUser.fulfilled, (state, action: PayloadAction<TUser>) => {
         state.isUserLoading = false;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
+        state.user = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isUserLoading = false;
