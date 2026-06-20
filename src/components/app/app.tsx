@@ -20,9 +20,9 @@ import { Preloader } from '@ui';
 import { useSelector, useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { fetchIngredients } from '../../services/slices/ingredientsSlice';
+import { getUser } from '../../services/slices/userSlice';
 
 const App = () => {
-  /** TODO: взять переменные из стора */
   const items = useSelector((state) => state.ingredients);
   const isIngredientsLoading = items.isIngredientsLoading;
   const ingredients = items.ingredients;
@@ -31,6 +31,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchIngredients());
+    dispatch(getUser());
   }, [dispatch]);
 
   const location = useLocation();
@@ -65,16 +66,16 @@ const App = () => {
             }
           />
           <Route path='/feed' element={<Feed />} />
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute onlyUnAuth />}>
             <Route path='/login' element={<Login />} />
           </Route>
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute onlyUnAuth />}>
             <Route path='/register' element={<Register />} />
           </Route>
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute onlyUnAuth />}>
             <Route path='/forgot-password' element={<ForgotPassword />} />
           </Route>
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute onlyUnAuth />}>
             <Route path='/reset-password' element={<ResetPassword />} />
           </Route>
           <Route element={<ProtectedRoute />}>

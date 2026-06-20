@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 import { fetchOrderByNumber } from '../../services/slices/feedSlice';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
   const { number } = useParams();
   const dispatch = useDispatch();
   const orderData = useSelector((state) => {

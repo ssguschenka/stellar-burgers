@@ -6,17 +6,22 @@ import {
   createOrderThunk,
   clearModal
 } from '../../services/slices/constructorSlice';
+import { useNavigate } from 'react-router';
 
 export const BurgerConstructor: FC = () => {
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const dispatch = useDispatch();
   const constructorItems = useSelector((state) => state.burgerConstructor);
 
+  const user = useSelector((state) => state.user.user);
   const orderRequest = constructorItems.orderRequest;
 
   const orderModalData = constructorItems.orderModalData;
-
+  const navigate = useNavigate();
   const onOrderClick = () => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
     if (!constructorItems.bun || orderRequest) return;
     const ingredientsIds = [
       constructorItems.bun._id,
@@ -39,8 +44,6 @@ export const BurgerConstructor: FC = () => {
       ),
     [constructorItems]
   );
-
-  // return null;
 
   return (
     <BurgerConstructorUI

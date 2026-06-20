@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import { fetchOrders } from '../../services/slices/profileOrdersslice';
 
 export const ProfileOrders: FC = () => {
-  /** TODO: взять переменную из стора */
   const dispatch = useDispatch();
   const orders: TOrder[] = useSelector((state) => state.profileOrders.orders);
 

@@ -4,13 +4,11 @@ import { TUser } from '@utils-types';
 import { setCookie } from '../../utils/cookie';
 
 type TRegisterState = {
-  // user: TUser | null;
   isRegisterLoading: boolean;
   error: string | null;
 };
 
 const initialState: TRegisterState = {
-  // user: null,
   isRegisterLoading: false,
   error: null
 };
@@ -42,7 +40,6 @@ export const registerserSlice = createSlice({
       .addCase(registerUser.fulfilled, (state) => {
         state.isRegisterLoading = false;
         state.error = null;
-        // state.user = action.payload;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isRegisterLoading = false;
