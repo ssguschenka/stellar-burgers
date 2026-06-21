@@ -2,20 +2,34 @@ import { FC, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
+import { useSelector, useDispatch } from '../../services/store';
+import { useParams, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { fetchOrderByNumber } from '../../services/slices/feedSlice';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+  const { number } = useParams();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const orderData = useSelector((state) => {
+    const orders = location.pathname.startsWith('/profile')
+      ? state.profileOrders.orders
+      : state.feed.orders;
 
-  const ingredients: TIngredient[] = [];
+    const orderFromList = orders.find((item) => item.number === Number(number));
+
+    return orderFromList || state.feed.currentOrder;
+  });
+
+  useEffect(() => {
+    if (number && !orderData) {
+      dispatch(fetchOrderByNumber(Number(number)));
+    }
+  }, [dispatch, number, orderData]);
+  const allIngredients = useSelector((state) => state.ingredients.ingredients);
+  const ingredients: TIngredient[] = orderData?.ingredients
+    .map((id) => allIngredients.find((item) => item._id === id))
+    .filter(Boolean) as TIngredient[];
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
