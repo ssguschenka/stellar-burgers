@@ -19,7 +19,7 @@ test.describe('Ингридиенты на главной странице', () 
     await expect(page.getByText('Хрустящие минеральные кольца')).toBeVisible();
   });
 
-  test('должен добавлять ингридиент в конструктор', async ({ page }) => {
+  test('добавляет ингридиент в конструктор', async ({ page }) => {
     await page.routeFromHAR('./e2e/hars/ingredients.har', {
       url: '**/api/ingredients',
       update: false
