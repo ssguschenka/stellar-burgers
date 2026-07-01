@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.13% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>49/67</span>
+                <span class='fraction'>67/67</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">87.5% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>7/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.13% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>49/67</span>
+                <span class='fraction'>67/67</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -152,14 +152,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -170,27 +170,27 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -208,7 +208,7 @@ type TIngredientState = {
   error: string | null;
 };
 &nbsp;
-const initialState: TIngredientState = {
+export const initialState: TIngredientState = {
   ingredients: [],
   currentIngredient: null,
   isIngredientsLoading: false,
@@ -219,14 +219,14 @@ export const fetchIngredients = createAsyncThunk&lt;TIngredient[]&gt;(
   'ingredients/fetchIngredients',
 &nbsp;
   async (_, thunkAPI) =&gt; {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      const data = await getIngredientsApi();</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      return data;</span>
-<span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >      return thunkAPI.rejectWithValue('Ошибка загрузки ингредиентов');</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+    try {
+      const data = await getIngredientsApi();
+&nbsp;
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Ошибка загрузки ингредиентов');
+    }
+  }
 );
 &nbsp;
 export const ingredientsSlice = createSlice({
@@ -236,28 +236,28 @@ export const ingredientsSlice = createSlice({
 &nbsp;
   reducers: {
     //закрыть ингридиент
-    clearCurrentIngredient: <span class="fstat-no" title="function not covered" >(state) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      state.currentIngredient = null;</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    clearCurrentIngredient: (state) =&gt; {
+      state.currentIngredient = null;
+    }
   },
 &nbsp;
   extraReducers: (builder) =&gt; {
     builder
       .addCase(fetchIngredients.pending, (state) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.isIngredientsLoading = true;</span>
-<span class="cstat-no" title="statement not covered" >        state.error = null;</span>
+        state.isIngredientsLoading = true;
+        state.error = null;
       })
       .addCase(
         fetchIngredients.fulfilled,
         (state, action: PayloadAction&lt;TIngredient[]&gt;) =&gt; {
-<span class="cstat-no" title="statement not covered" >          state.isIngredientsLoading = false;</span>
-<span class="cstat-no" title="statement not covered" >          state.ingredients = action.payload;</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
+          state.isIngredientsLoading = false;
+          state.ingredients = action.payload;
+        }
       )
       .addCase(fetchIngredients.rejected, (state, action) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.isIngredientsLoading = false;</span>
-<span class="cstat-no" title="statement not covered" >        state.error =</span>
-<span class="cstat-no" title="statement not covered" >          (action.payload as string) || 'Ошибка загрузки ингридиентов';</span>
+        state.isIngredientsLoading = false;
+        state.error =
+          (action.payload as string)<span class="branch-0 cbranch-no" title="branch not covered" > || 'Ошибка загрузки ингридиентов';</span>
       });
   }
 });
@@ -271,7 +271,7 @@ export default ingredientsSlice.reducer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-01T12:07:14.009Z
+                at 2026-07-01T12:42:52.081Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
