@@ -17,6 +17,9 @@ test('проверяет работу модалльного окна ингри
   //проверяем что открывается модалка 
   await expect(page.getByTestId('modal')).toBeVisible();
 
+  //проверяем, что в модальном окне виден именно тот ингредиент
+  await expect(ingredient).toBeVisible;
+
   //проверяем что модалка закрывается при клике на крестик
   await page.getByTestId('close-button').click();
 
