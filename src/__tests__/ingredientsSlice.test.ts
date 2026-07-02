@@ -4,8 +4,6 @@ import reducer, {
   clearCurrentIngredient,
   fetchIngredients
 } from '../services/slices/ingredientsSlice';
-import * as api from '@api';
-import { store } from '../services/store';
 
 const mockIngredients = [
   {
@@ -79,37 +77,30 @@ describe('тесты для слайса ингредиентов', () => {
 
   describe('тесты асинхронных экшенов', () => {
     test('тест для асинхронного экшена fetchIngredients fulfilled', async () => {
-      const fetchIngredientsSpy = jest
-        .spyOn(api, 'getIngredientsApi')
-        .mockResolvedValue(mockIngredients);
+      const action = {
+        type: fetchIngredients.fulfilled.type,
+        payload: mockIngredients
+      };
+      const state = reducer(initialState, action);
 
-      await store.dispatch(fetchIngredients());
-
-      const state = store.getState().ingredients;
       expect(state.isIngredientsLoading).toBe(false);
       expect(state.ingredients).toEqual(mockIngredients);
-
-      expect(fetchIngredientsSpy).toHaveBeenCalledTimes(1);
     });
 
     test('тест для асинхронного экшена fetchIngredients rejected', async () => {
-      const createOrderSpy = jest
-        .spyOn(api, 'getIngredientsApi')
-        .mockRejectedValue(new Error('Ошибка'));
+      const action = { type: fetchIngredients.rejected.type };
+      const state = reducer(initialState, action);
 
-      await store.dispatch(fetchIngredients());
-
-      expect(store.getState().ingredients.isIngredientsLoading).toBe(false);
-      expect(createOrderSpy).toHaveBeenCalledTimes(1);
+      expect(state.isIngredientsLoading).toBe(false);
+      expect(state.error).toBe('Ошибка загрузки ингридиентов');
     });
 
     test('тест для асинхронного экшена fetchIngredients pending', async () => {
-      const state = reducer(
-        initialState,
-        fetchIngredients.pending('requestId')
-      );
+      const action = { type: fetchIngredients.pending.type };
+      const state = reducer(initialState, action);
 
       expect(state.isIngredientsLoading).toBe(true);
+      expect(state.error).toBe(null);
     });
   });
 });

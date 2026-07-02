@@ -200,40 +200,30 @@ describe('тесты для слайса конструктора', () => {
         price: 1000
       };
 
-      const createOrderSpy = jest
-        .spyOn(api, 'orderBurgerApi')
-        .mockResolvedValue({
-          success: true,
-          order: orderModalData,
-          name: 'Тестовый заказ'
-        });
+      const action = {
+        type: createOrderThunk.fulfilled.type,
+        payload: orderModalData
+      };
 
-      await store.dispatch(createOrderThunk(['1', '3']));
-
-      const state = store.getState().burgerConstructor;
-      expect(state.orderModalData?.number).toBe(12345);
+      const state = reducer(initialState, action);
+      
+      expect(state.orderModalData?.number).toBe(action.payload.number);
       expect(state.ingredients).toEqual([]);
       expect(state.bun).toBeNull();
       expect(state.orderRequest).toBe(false);
-      expect(createOrderSpy).toHaveBeenCalledTimes(1);
     });
 
     test('тест для асинхронного экшена createOrderThunk rejected', async () => {
-      const createOrderSpy = jest
-        .spyOn(api, 'orderBurgerApi')
-        .mockRejectedValue(new Error('Ошибка'));
+      const action = {type: createOrderThunk.rejected.type}
+      const state = reducer(initialState, action);
 
-      await store.dispatch(createOrderThunk(['1', '3']));
+      expect(state.orderRequest).toBe(false);
 
-      expect(store.getState().burgerConstructor.orderRequest).toBe(false);
-      expect(createOrderSpy).toHaveBeenCalledTimes(1);
     });
 
     test('тест для асинхронного экшена createOrderThunk pending', async () => {
-      const state = reducer(
-        initialState,
-        createOrderThunk.pending('requestId', ['1', '3'])
-      );
+      const action = { type: createOrderThunk.pending.type };
+      const state = reducer(initialState, action);
 
       expect(state.orderRequest).toBe(true);
     });

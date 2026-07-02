@@ -63,7 +63,7 @@ test('проверяет оформление заказа', async ({ page }) =>
   //клик по кнопке оформить заказ
   await page.getByTestId('btn-order').click();
 
-  //проверяет что модалка открылась и номер заказа верный
+  //проверяет что модалка открылась и номер заказа верный(соответсвует номеру из ответа сервера)
   await expect(page.getByTestId('modal')).toBeVisible();
   await expect(page.getByTestId('modal')).toContainText('6825');
 
